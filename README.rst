@@ -8,8 +8,8 @@ django-sheets
 .. image:: https://travis-ci.org/georgewhewell/django-sheets.png?branch=master
     :target: https://travis-ci.org/georgewhewell/django-sheets
 
-.. image:: https://coveralls.io/repos/georgewhewell/django-sheets/badge.png?branch=master
-    :target: https://coveralls.io/r/georgewhewell/django-sheets?branch=master
+.. image:: https://coveralls.io/repos/georgewhewell/django-sheets/badge.png
+    :target: https://coveralls.io/r/georgewhewell/django-sheets
 
 Use Google Sheets as context variables in Django templates
 
