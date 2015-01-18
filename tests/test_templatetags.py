@@ -25,6 +25,13 @@ gdocs_format = 'https://docs.google.com/spreadsheets/d/{key}/export\?format\=csv
 
 class TestSheets(SimpleTestCase):
 
+    def test_no_key(self):
+        """
+        Empty keys should throw exception
+        """
+        t = template.Template(sample_template)
+        self.assertRaises(RuntimeError, lambda: t.render(template.Context()))
+
     @httpretty.activate
     def test_404(self):
         """
