@@ -38,7 +38,7 @@ class TestSheets(SimpleTestCase):
         Failing to fetch sheet should return empty list
         """
         httpretty.register_uri(httpretty.GET, gdocs_format.format(key='test'),
-           body=u'404 Not Found',
+           body='404 Not Found',
            content_type='html/text',
            status=404)
         t = template.Template(sample_template)
