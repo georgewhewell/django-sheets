@@ -1,17 +1,22 @@
 # Config file for automatic testing at travis-ci.org
 language: python
 
-python:
-  - 2.7
-  - 3.4
-  - pypy
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-    - pip install -r requirements-test.txt
+  - pip install tox 
 
-# command to run tests using coverage, e.g. python setup.py test
-script: coverage run --source sheets runtests.py
+script:
+  - tox
 
-# report coverage to coveralls.io
-after_success: coveralls
+env:
+  - TOXENV=py27-django1.5
+  - TOXENV=py27-django1.6
+  - TOXENV=py27-django1.7
+  - TOXENV=py33-django1.5
+  - TOXENV=py33-django1.6
+  - TOXENV=py33-django1.7
+  - TOXENV=py34-django1.5
+  - TOXENV=py34-django1.6
+  - TOXENV=py34-django1.7
+
+# # report coverage to coveralls.io
+# after_success: coveralls
