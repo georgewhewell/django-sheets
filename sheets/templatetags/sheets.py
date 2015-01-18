@@ -18,7 +18,6 @@ def get_sheet(key):
         return urlopen(gdocs_format.format(key=key))
     except HTTPError as error:
         logger.error("Error fetching url: %s" % error)
-        return []
 
 def read_csv(csv_content):
     reader_input = io.TextIOWrapper(csv_content, encoding='utf8')
@@ -31,4 +30,8 @@ def csv_tag(key):
         raise RuntimeError('Sheet key not supplied')
 
     response_data = get_sheet(key)
+
+    if response_data is None:
+        return None
+
     return read_csv(response_data)

@@ -47,7 +47,7 @@ class TestSheets(SimpleTestCase):
     @httpretty.activate
     def test_sample(self):
         httpretty.register_uri(httpretty.GET, gdocs_format.format(key=sample_key),
-           body=open(sample_response).read(),
+           body=open(sample_response, 'rt', encoding='utf-8').read(),
            content_type='text/csv', status=200)
         t = template.Template(sample_template)
         self.assertEqual(t.render(template.Context({'key': sample_key})), open(sample_output).read())
