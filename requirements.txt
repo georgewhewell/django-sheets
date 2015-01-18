@@ -1,3 +1,0 @@
-django>=1.7.2
-wheel==0.24.0
-# Additional requirements go here

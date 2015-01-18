@@ -1,4 +1,4 @@
-django>=1.7.2
+django>=1.5
 coverage
 coveralls
 mock>=1.0.1
@@ -9,3 +9,4 @@ tox>=1.7.0
 
 # Additional test requirements go here
 httpretty>=0.8.3
+six>=1.9.0

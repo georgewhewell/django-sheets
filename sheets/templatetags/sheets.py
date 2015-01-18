@@ -2,7 +2,9 @@ from django import template
 
 import csv
 import logging
-import urllib2
+
+from six.moves.urllib.request import urlopen
+from six.moves.urllib.error import HTTPError
 
 logger = logging.getLogger(__name__)
 register = template.Library()
@@ -12,8 +14,8 @@ gdocs_format = 'https://docs.google.com/spreadsheets/d/{key}/export\?format\=csv
 
 def get_sheet(key):
     try:
-        return urllib2.urlopen(gdocs_format.format(key=key))
-    except urllib2.HTTPError as error:
+        return urlopen(gdocs_format.format(key=key))
+    except HTTPError as error:
         logger.error("Error fetching url: %s" % error)
         return []
 
