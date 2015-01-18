@@ -36,7 +36,6 @@ coverage:
 	coverage run --source sheets runtests.py
 	coverage report -m
 	coverage html
-	open htmlcov/index.html
 
 docs:
 	rm -f docs/django-sheets.rst
