@@ -24,7 +24,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 django-sheets tests
+	flake8 sheets tests
 
 test:
 	python runtests.py test
@@ -33,7 +33,7 @@ test-all:
 	tox
 
 coverage:
-	coverage run --source django-sheets setup.py test
+	coverage run --source sheets runtests.py
 	coverage report -m
 	coverage html
 	open htmlcov/index.html
@@ -41,7 +41,7 @@ coverage:
 docs:
 	rm -f docs/django-sheets.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django-sheets
+	sphinx-apidoc -o docs/ sheets
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	open docs/_build/html/index.html
