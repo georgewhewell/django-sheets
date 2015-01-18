@@ -3,8 +3,8 @@ from django import template
 import csv
 import logging
 
-from six.moves.urllib.request import urlopen
-from six.moves.urllib.error import HTTPError
+from django.utils.six.moves.urllib.request import urlopen
+from django.utils.six.moves.urllib.error import HTTPError
 
 logger = logging.getLogger(__name__)
 register = template.Library()
