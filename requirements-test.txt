@@ -1,4 +1,4 @@
-django>=1.5
+django==1.7
 coverage
 coveralls
 mock>=1.0.1
@@ -8,4 +8,4 @@ flake8>=2.1.0
 tox>=1.7.0
 
 # Additional test requirements go here
-httpretty>=0.8.3
+responses>=0.3

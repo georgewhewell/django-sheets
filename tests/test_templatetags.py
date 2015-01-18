@@ -9,7 +9,7 @@ Tests for `django-sheets` models module.
 """
 
 import os
-import httpretty
+import responses
 from io import open
 
 from django import template
@@ -21,7 +21,7 @@ sample_template = '{% load sheets %}{% csv key as csvrows %}{% for row in csvrow
 sample_response = os.path.join(os.path.dirname(__file__), 'sample_response.csv')
 sample_output = os.path.join(os.path.dirname(__file__), 'sample_output.txt')
 
-gdocs_format = 'https://docs.google.com/spreadsheets/d/{key}/export\?format\=csv\&id\={key}'
+gdocs_format = 'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
 
 
 class TestSheets(SimpleTestCase):
@@ -32,23 +32,27 @@ class TestSheets(SimpleTestCase):
         """
         t = template.Template(sample_template)
         self.assertRaises(RuntimeError, lambda: t.render(template.Context()))
+        self.assertEqual(0, len(responses.calls))
 
-    @httpretty.activate
+    @responses.activate
     def test_404(self):
         """
         Failing to fetch sheet should return empty list
         """
-        httpretty.register_uri(httpretty.GET, gdocs_format.format(key='test'),
-           body='404 Not Found',
-           content_type='html/text',
-           status=404)
+        responses.add(responses.GET, gdocs_format.format(key='test'),
+           body='404 Not Found', content_type='html/text', status=404,
+           match_querystring=True)
         t = template.Template(sample_template)
         self.assertEqual(t.render(template.Context({'key': 'test'})), '')
+        self.assertEqual(1, len(responses.calls))
 
-    @httpretty.activate
+    @responses.activate
     def test_sample(self):
-        httpretty.register_uri(httpretty.GET, gdocs_format.format(key=sample_key),
+        responses.add(responses.GET, gdocs_format.format(key=sample_key),
            body=open(sample_response, 'rt', encoding='utf-8').read(),
-           content_type='text/csv', status=200)
+           match_querystring=True, status=200)
         t = template.Template(sample_template)
-        self.assertEqual(t.render(template.Context({'key': sample_key})), open(sample_output).read())
+        output = t.render(template.Context({'key': sample_key}))
+        self.assertEqual(responses.calls[0].request.url, gdocs_format.format(key=sample_key))
+        self.assertEqual(1, len(responses.calls))
+        self.assertEqual(output, open(sample_output).read())
