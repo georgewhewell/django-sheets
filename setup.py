@@ -36,6 +36,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
+        'django>=1.5',
     ],
     license="BSD",
     zip_safe=False,
