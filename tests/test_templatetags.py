@@ -10,6 +10,7 @@ Tests for `django-sheets` models module.
 
 import os
 import httpretty
+from io import open
 
 from django import template
 from django.test import SimpleTestCase
