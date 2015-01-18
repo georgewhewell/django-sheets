@@ -1,5 +1,6 @@
 from django import template
 
+import io
 import csv
 import logging
 
@@ -20,7 +21,8 @@ def get_sheet(key):
         return []
 
 def read_csv(csv_content):
-    reader = csv.reader(csv_content)
+    reader_input = io.TextIOWrapper(csv_content, encoding='utf8')
+    reader = csv.reader(reader_input)
     return [row for row in reader]
 
 @register.assignment_tag(name='csv')
