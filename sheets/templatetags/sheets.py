@@ -7,7 +7,8 @@ import requests
 logger = logging.getLogger(__name__)
 register = template.Library()
 
-gdocs_format = 'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
+gdocs_format = \
+    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
 
 
 def get_sheet(key):
@@ -18,9 +19,11 @@ def get_sheet(key):
     except requests.exceptions.RequestException as error:
         logger.error("Error fetching url: %s" % error)
 
+
 def read_csv(csv_content):
     reader = csv.reader(csv_content.text)
     return [row for row in reader]
+
 
 @register.assignment_tag(name='csv')
 def csv_tag(key):
