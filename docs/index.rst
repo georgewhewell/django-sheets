@@ -10,6 +10,7 @@ Welcome to django-sheets's documentation!
    :maxdepth: 2
 
    installation
+   configuration
    usage
    authors
    history

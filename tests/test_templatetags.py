@@ -14,6 +14,8 @@ from io import open
 
 from django import template
 from django.test import SimpleTestCase
+from django.test.utils import override_settings
+from django.core.cache import cache
 
 sample_template = \
     """{% spaceless %}
@@ -45,6 +47,9 @@ gdocs_format = \
 
 
 class TestSheets(SimpleTestCase):
+
+    def setUp(self):
+        cache.clear()
 
     def test_no_key(self):
         """
@@ -86,6 +91,25 @@ class TestSheets(SimpleTestCase):
 
     @responses.activate
     def test_cache(self):
+        """
+        When cache enabled, rendering tag twice should issue one request
+        """
+        responses.add(
+            responses.GET, gdocs_format.format(key=sample_key),
+            body=open(sample_response).read(),
+            match_querystring=True, status=200)
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        output = t.render(template.Context({'key': sample_key}))
+        self.assertEqual(output, open(sample_output).read())
+        self.assertEqual(1, len(responses.calls))
+
+    @responses.activate
+    @override_settings(SHEETS_CACHE_DISABLED=True)
+    def test_cache_disabled(self):
+        """
+        When cache disabled, rendering tag twice should issue two requests
+        """
         responses.add(
             responses.GET, gdocs_format.format(key=sample_key),
             body=open(sample_response).read(),
@@ -94,4 +118,18 @@ class TestSheets(SimpleTestCase):
         t.render(template.Context({'key': sample_key}))
         t.render(template.Context({'key': sample_key}))
 
+        self.assertEqual(2, len(responses.calls))
+
+    @responses.activate
+    def test_cache_when_empty(self):
+        """
+        Make sure that empty spreadsheets are not mistaken for cache miss
+        """
+        responses.add(
+            responses.GET, gdocs_format.format(key=sample_key),
+            body='',
+            match_querystring=True, status=200)
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        t.render(template.Context({'key': sample_key}))
         self.assertEqual(1, len(responses.calls))

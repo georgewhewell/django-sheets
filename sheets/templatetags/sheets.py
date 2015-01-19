@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
 from django import template
+from django.conf import settings
+from django.core.cache import cache
 from django.utils.encoding import force_str, force_text
 
 import csv
@@ -13,10 +15,12 @@ register = template.Library()
 gdocs_format = \
     'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
 
+CACHE_TIMEOUT = getattr(settings, 'SHEETS_CACHE_TIMEOUT', 300)
+CACHE_KEY = 'django-sheets-{key}'
+
 
 def get_sheet(key):
     try:
-        print(gdocs_format.format(key=key))
         response = requests.get(gdocs_format.format(key=key))
         response.raise_for_status()
         return response
@@ -33,16 +37,30 @@ def read_csv(csv_content):
     )
 
 
+class ExplicitNone:
+    pass
+
+
 @register.assignment_tag(name='csv')
 def csv_tag(key):
     if not key:
         raise RuntimeError('Sheet key not supplied')
 
+    cache_enabled = not getattr(settings, 'SHEETS_CACHE_DISABLED', False)
+
+    if cache_enabled:
+        cache_key = CACHE_KEY.format(key=key)
+        cached_output = cache.get(cache_key)
+        if cached_output is not None:
+            return cached_output
+
     response_data = get_sheet(key)
 
-    if response_data is None:
-        return None
+    if response_data:
+        reader = read_csv(response_data.content)
+        response_data = [[force_text(cell) for cell in row] for row in reader]
 
-    reader = read_csv(response_data.content)
+    if cache_enabled:
+        cache.set(cache_key, response_data, CACHE_TIMEOUT)
 
-    return [[force_text(cell) for cell in row] for row in reader]
+    return response_data
