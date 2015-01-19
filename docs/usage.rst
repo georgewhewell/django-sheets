@@ -22,7 +22,7 @@ Assign the CSV data to a variable using the ``{% csv %}`` tag::
 Try it using the sample key above::
 
     {% load sheets %}
-    {% csv "1bJNR7SLqpzWJNvstNcFR4gtS-M7Bmn0D1X2lGTJPvGM" as uk500 %}
+    {% csv "1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE" as uk500 %}
     <table>
     {% for row in uk500 %}
         <tr>

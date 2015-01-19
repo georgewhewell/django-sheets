@@ -21,18 +21,8 @@ Use Google Sheets as context variables in Django templates
 Documentation
 -------------
 
-The full documentation is at https://django-sheets.readthedocs.org.
+Documentation is available at https://django-sheets.readthedocs.org.
 
-Quickstart
-----------
-
-Install django-sheets::
-
-    pip install django-sheets
-
-Then use it in a project::
-
-    import django-sheets
 
 Features
 --------
