@@ -83,3 +83,15 @@ class TestSheets(SimpleTestCase):
             gdocs_format.format(key=sample_key))
 
         self.assertEqual(output, open(sample_output).read())
+
+    @responses.activate
+    def test_cache(self):
+        responses.add(
+            responses.GET, gdocs_format.format(key=sample_key),
+            body=open(sample_response).read(),
+            match_querystring=True, status=200)
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        t.render(template.Context({'key': sample_key}))
+
+        self.assertEqual(1, len(responses.calls))
