@@ -32,6 +32,13 @@ Try it using the sample key above::
         </td>
     {% endfor %}
 
-View the output, you should see::
+View the output, you should see
 
-    bleh
+=================================  =======================  ===============  =======================
+Origin (English)                   Name (English)           Origin (Native)  Name (Native)
+Australia                          Nicole Kidman            Australia        Nicole Kidman
+Austria                            Johann Strauss           Österreich       Johann Strauß
+Belgium (Flemish)                  Rene Magritte            België           René Magritte
+Belgium (French)                   Rene Magritte            Belgique         René Magritte
+Belgium (German)                   Rene Magritte            Belgien          René Magritte
+=================================  =======================  ===============  =======================
