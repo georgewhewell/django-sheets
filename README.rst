@@ -2,6 +2,8 @@
 django-sheets
 =============================
 
+Use Google Sheets as context variables in Django templates
+
 .. image:: https://badge.fury.io/py/django-sheets.png
     :target: https://badge.fury.io/py/django-sheets
 
@@ -16,15 +18,7 @@ django-sheets
      :alt: Requirements Status
 
 
-Use Google Sheets as context variables in Django templates
-
 Documentation
 -------------
 
 Documentation is available at https://django-sheets.readthedocs.org.
-
-
-Features
---------
-
-* TODO
