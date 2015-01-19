@@ -15,6 +15,7 @@ django-sheets
      :target: https://requires.io/github/georgewhewell/django-sheets/requirements/?branch=master
      :alt: Requirements Status
 
+
 Use Google Sheets as context variables in Django templates
 
 Documentation
