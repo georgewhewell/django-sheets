@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django import template
 
 import csv
@@ -21,8 +22,12 @@ def get_sheet(key):
 
 
 def read_csv(csv_content):
-    reader = csv.reader(csv_content.text)
-    return [row for row in reader]
+    return csv.reader(
+        csv_content.splitlines(),
+        delimiter=str(','),
+        quotechar=str('"'),
+        quoting=csv.QUOTE_MINIMAL,
+    )
 
 
 @register.assignment_tag(name='csv')
@@ -35,4 +40,4 @@ def csv_tag(key):
     if response_data is None:
         return None
 
-    return read_csv(response_data)
+    return read_csv(response_data.text)
