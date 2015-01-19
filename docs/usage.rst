@@ -24,7 +24,7 @@ Try it using the sample key above::
     {% load sheets %}
     {% csv "1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE" as csv_data %}
     <table>
-    {% for row in uk500 %}
+    {% for row in csv_data %}
         <tr>
         {% for cell in row %}
             <td>{{ cell }}</td>
