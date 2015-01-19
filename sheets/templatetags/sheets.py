@@ -14,6 +14,7 @@ gdocs_format = \
 
 def get_sheet(key):
     try:
+        print(gdocs_format.format(key=key))
         response = requests.get(gdocs_format.format(key=key))
         response.raise_for_status()
         return response
@@ -40,4 +41,6 @@ def csv_tag(key):
     if response_data is None:
         return None
 
-    return read_csv(response_data.text)
+    reader = read_csv(response_data.content)
+
+    return [[cell.decode('utf8') for cell in row] for row in reader]

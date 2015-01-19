@@ -17,6 +17,10 @@ from django.test import SimpleTestCase
 
 sample_template = \
     """{% spaceless %}
+    <html>
+    <head>
+    <meta charset="utf-8">
+    </head>
     {% load sheets %}
     {% csv key as uk500 %}
     <table>
@@ -28,8 +32,9 @@ sample_template = \
         </tr>
     {% endfor %}
     </table>
+    </html>
     {% endspaceless %}"""
-sample_key = '1bJNR7SLqpzWJNvstNcFR4gtS-M7Bmn0D1X2lGTJPvGM'
+sample_key = '1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE'
 sample_response = os.path.join(
     os.path.dirname(__file__), 'sample_response.csv')
 sample_output = os.path.join(
@@ -61,14 +66,14 @@ class TestSheets(SimpleTestCase):
         t = template.Template(sample_template)
         self.assertEqual(
             t.render(template.Context({'key': 'test'})),
-            '<table></table>')
+            '<html><head><meta charset="utf-8"></head><table></table></html>')
         self.assertEqual(1, len(responses.calls))
 
     @responses.activate
     def test_sample_mocked(self):
         responses.add(
             responses.GET, gdocs_format.format(key=sample_key),
-            body=open(sample_response, 'rt', encoding='utf-8').read(),
+            body=open(sample_response).read(),
             match_querystring=True, status=200)
         t = template.Template(sample_template)
         output = t.render(template.Context({'key': sample_key}))
@@ -76,4 +81,5 @@ class TestSheets(SimpleTestCase):
         self.assertEqual(
             responses.calls[0].request.url,
             gdocs_format.format(key=sample_key))
+
         self.assertEqual(output, open(sample_output).read())
