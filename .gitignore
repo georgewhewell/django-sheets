@@ -46,3 +46,4 @@ docs/_build
 
 # Coverage
 /htmlcov
+.DS_Store
