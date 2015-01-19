@@ -8,15 +8,8 @@ Google Sheets spreadsheet. To find it, open your sheet and select
 Click *Get sharable link* from the dialog. You'll find the 44-character key as
 part of the URL.
 
-<<<<<<< HEAD
 For example, the sample link ``https://docs.google.com/spreadsheets/d/1bJNR7SLqpzWJNvstNcFR4gtS-M7Bmn0D1X2lGTJPvGM/pubhtml``
 has key ``1bJNR7SLqpzWJNvstNcFR4gtS-M7Bmn0D1X2lGTJPvGM``
-=======
-Press Share, and select the link. You'll find the 44-character key as
-part of the link. For example, the sample link:
-
-`https://docs.google.com/spreadsheets/d/**1bJNR7SLqpzWJNvstNcFR4gtS-M7Bmn0D1X2lGTJPvGM**/pubhtml`
->>>>>>> feature-caching
 
 Load the django-sheets template tags in your template::
 
