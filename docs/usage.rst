@@ -30,6 +30,7 @@ Try it using the sample key above::
             <td>{{ cell }}</td>
         {% endfor %}
         </td>
+    </table>
     {% endfor %}
 
 View the output, you should see
