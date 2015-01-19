@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
+
 from django import template
+from django.utils.encoding import force_str, force_text
 
 import csv
 import logging
@@ -24,7 +26,7 @@ def get_sheet(key):
 
 def read_csv(csv_content):
     return csv.reader(
-        csv_content.splitlines(),
+        force_str(csv_content).splitlines(),
         delimiter=str(','),
         quotechar=str('"'),
         quoting=csv.QUOTE_MINIMAL,
@@ -43,4 +45,4 @@ def csv_tag(key):
 
     reader = read_csv(response_data.content)
 
-    return [[cell.decode('utf8') for cell in row] for row in reader]
+    return [[force_text(cell) for cell in row] for row in reader]
