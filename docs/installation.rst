@@ -2,11 +2,14 @@
 Installation
 ============
 
-At the command line::
+To install the latest release from PyPI using pip::
 
-    $ easy_install django-sheets
-
-Or, if you have virtualenvwrapper installed::
-
-    $ mkvirtualenv django-sheets
     $ pip install django-sheets
+
+Add ``sheets`` to ``INSTALLED_APPS`` in settings.py::
+
+    INSTALLED_APPS = (
+        ...
+        'sheets',
+        ...
+    )
