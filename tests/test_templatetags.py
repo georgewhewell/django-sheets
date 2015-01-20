@@ -133,3 +133,18 @@ class TestSheets(SimpleTestCase):
         t.render(template.Context({'key': sample_key}))
         t.render(template.Context({'key': sample_key}))
         self.assertEqual(1, len(responses.calls))
+
+    @responses.activate
+    def test_floats(self):
+        """
+        Make sure that empty spreadsheets are not mistaken for cache miss
+        """
+        responses.add(
+            responses.GET, gdocs_format.format(key=sample_key),
+            body='1,2,3',
+            match_querystring=True, status=200)
+        t = template.Template(
+            '{% load sheets %}{% csv key as data %}'
+            '{{ data.0.0 + data.0.1 + data.0.2 }}')
+        output = t.render(template.Context({'key': sample_key}))
+        self.assertEqual(output, '6')
