@@ -4,6 +4,7 @@ from django import template
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.encoding import force_str, force_text
+from django.utils.functional import cached_property
 
 import csv
 import logging
@@ -19,22 +20,36 @@ CACHE_TIMEOUT = getattr(settings, 'SHEETS_CACHE_TIMEOUT', 300)
 CACHE_KEY = 'django-sheets-{key}'
 
 
-def get_sheet(key):
-    try:
-        response = requests.get(gdocs_format.format(key=key))
+class Sheet(object):
+
+    def __init__(self, key):
+        self.key = key
+
+    @cached_property
+    def data(self):
+        response = requests.get(gdocs_format.format(key=self.key))
         response.raise_for_status()
-        return response
-    except requests.exceptions.RequestException as error:
-        logger.error("Error fetching url: %s" % error)
+        reader = csv.reader(
+            force_str(response.content).splitlines(),
+            delimiter=str(','),
+            quotechar=str('"'),
+            quoting=csv.QUOTE_MINIMAL,
+        )
+        return [[(value if type(value), float) else force_str(value))
+            for value in rows] for rows in reader]
 
+    def __len__(self):
+        return len(self.data)
 
-def read_csv(csv_content):
-    return csv.reader(
-        force_str(csv_content).splitlines(),
-        delimiter=str(','),
-        quotechar=str('"'),
-        quoting=csv.QUOTE_MINIMAL,
-    )
+    def headers(self):
+        return self.data[0] if self.data else [] 
+
+    def rows(self):
+        return self.data[1:] if len(self) > 1 else []
+
+    def next(self):
+        for row in self.data:
+            yield row
 
 
 class ExplicitNone:
@@ -54,13 +69,9 @@ def csv_tag(key):
         if cached_output is not None:
             return cached_output
 
-    response_data = get_sheet(key)
-
-    if response_data:
-        reader = read_csv(response_data.content)
-        response_data = [[force_text(cell) for cell in row] for row in reader]
+    sheet = Sheet(key)
 
     if cache_enabled:
-        cache.set(cache_key, response_data, CACHE_TIMEOUT)
+        cache.set(cache_key, sheet, CACHE_TIMEOUT)
 
-    return response_data
+    return sheet
