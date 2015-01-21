@@ -145,6 +145,9 @@ class TestSheets(SimpleTestCase):
             match_querystring=True, status=200)
         t = template.Template(
             '{% load sheets %}{% csv key as data %}'
-            '{{ data.0.0 + data.0.1 + data.0.2 }}')
+            '{% for row in data %}'
+            '{% for cell in row %}'
+            '{{ cell|add:"1" }}'
+            '{% endfor %}{% endfor %}')
         output = t.render(template.Context({'key': sample_key}))
-        self.assertEqual(output, '6')
+        self.assertEqual(output, '234')

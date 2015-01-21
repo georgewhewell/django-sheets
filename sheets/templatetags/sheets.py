@@ -25,6 +25,22 @@ class Sheet(object):
     def __init__(self, key):
         self.key = key
 
+    def __len__(self):
+        return len(self.data)
+
+    def __iter__(self):
+        return iter(self.data)
+
+    def headers(self):
+        return self.data[0] if self.data else []
+
+    def rows(self):
+        return self.data[1:] if len(self) > 1 else []
+
+    def next(self):
+        for row in self.data:
+            yield row
+
     @cached_property
     def data(self):
         response = requests.get(gdocs_format.format(key=self.key))
@@ -35,21 +51,7 @@ class Sheet(object):
             quotechar=str('"'),
             quoting=csv.QUOTE_MINIMAL,
         )
-        return [[(value if type(value), float) else force_str(value))
-            for value in rows] for rows in reader]
-
-    def __len__(self):
-        return len(self.data)
-
-    def headers(self):
-        return self.data[0] if self.data else [] 
-
-    def rows(self):
-        return self.data[1:] if len(self) > 1 else []
-
-    def next(self):
-        for row in self.data:
-            yield row
+        return [[force_text(cell) for cell in row] for row in reader]
 
 
 class ExplicitNone:
