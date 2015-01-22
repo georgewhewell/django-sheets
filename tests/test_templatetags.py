@@ -105,6 +105,20 @@ class TestSheets(SimpleTestCase):
         self.assertEqual(1, len(responses.calls))
 
     @responses.activate
+    def test_cache_lazy(self):
+        """
+        tag should not cause http request if never accessed
+        """
+        responses.add(
+            responses.GET, gdocs_format.format(key=sample_key),
+            body=open(sample_response).read(),
+            match_querystring=True, status=200)
+        t = template.Template('{% load sheets %}{% csv key as data %}Hello')
+        output = t.render(template.Context({'key': sample_key}))
+        self.assertEqual(output, 'Hello')
+        self.assertEqual(0, len(responses.calls))
+
+    @responses.activate
     @override_settings(SHEETS_CACHE_DISABLED=True)
     def test_cache_disabled(self):
         """
@@ -135,9 +149,9 @@ class TestSheets(SimpleTestCase):
         self.assertEqual(1, len(responses.calls))
 
     @responses.activate
-    def test_floats(self):
+    def test_add_filter(self):
         """
-        Make sure that empty spreadsheets are not mistaken for cache miss
+        Make sure integers are parsed by django filters
         """
         responses.add(
             responses.GET, gdocs_format.format(key=sample_key),

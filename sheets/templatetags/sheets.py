@@ -23,6 +23,8 @@ CACHE_KEY = 'django-sheets-{key}'
 class Sheet(object):
 
     def __init__(self, key):
+        if not key:
+            raise RuntimeError('Sheet key not supplied')
         self.key = key
 
     def __len__(self):
@@ -37,16 +39,36 @@ class Sheet(object):
     def rows(self):
         return self.data[1:] if len(self) > 1 else []
 
-    def next(self):
-        for row in self.data:
-            yield row
+    def _fetch_sheet(self, key):
+        try:
+            response = requests.get(gdocs_format.format(key=key))
+            response.raise_for_status()
+            return force_str(response.content)
+        except requests.HTTPError as exp:
+            logger.error('Error fetching spreadsheet: %s' % exp)
+            return force_str('')
+
+    def fetch_sheet(self, key):
+        cache_enabled = not getattr(settings, 'SHEETS_CACHE_DISABLED', False)
+        if cache_enabled:
+            cache_key = CACHE_KEY.format(key=key)
+            cached_output = cache.get(cache_key)
+
+            if cached_output is not None:
+                return cached_output
+
+        sheet = self._fetch_sheet(key)
+
+        if cache_enabled:
+            cache.set(cache_key, sheet, CACHE_TIMEOUT)
+
+        return sheet
 
     @cached_property
     def data(self):
-        response = requests.get(gdocs_format.format(key=self.key))
-        response.raise_for_status()
+        sheet = self.fetch_sheet(self.key)
         reader = csv.reader(
-            force_str(response.content).splitlines(),
+            sheet.splitlines(),
             delimiter=str(','),
             quotechar=str('"'),
             quoting=csv.QUOTE_MINIMAL,
@@ -60,20 +82,4 @@ class ExplicitNone:
 
 @register.assignment_tag(name='csv')
 def csv_tag(key):
-    if not key:
-        raise RuntimeError('Sheet key not supplied')
-
-    cache_enabled = not getattr(settings, 'SHEETS_CACHE_DISABLED', False)
-
-    if cache_enabled:
-        cache_key = CACHE_KEY.format(key=key)
-        cached_output = cache.get(cache_key)
-        if cached_output is not None:
-            return cached_output
-
-    sheet = Sheet(key)
-
-    if cache_enabled:
-        cache.set(cache_key, sheet, CACHE_TIMEOUT)
-
-    return sheet
+    return Sheet(key)
