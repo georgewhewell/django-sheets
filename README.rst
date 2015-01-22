@@ -25,27 +25,35 @@ In your template::
     {% load sheets %}
     {% csv "1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE" as csv_data %}
     <table>
-    {% for row in csv_data %}
-        <tr>
-        {% for cell in row %}
-            <td>{{ cell }}</td>
-        {% endfor %}
-        </td>
+        <thead>
+            <tr>
+            {% for header in data.headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data.rows %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    {% endfor %}
+    
 
 View the output, you should see
 
-=================================  =======================  ===============  =======================
-Origin (English)                   Name (English)           Origin (Native)  Name (Native)
-Australia                          Nicole Kidman            Australia        Nicole Kidman
-Austria                            Johann Strauss           Österreich       Johann Strauß
-Belgium (Flemish)                  Rene Magritte            België           René Magritte
-Belgium (French)                   Rene Magritte            Belgique         René Magritte
-Belgium (German)                   Rene Magritte            Belgien          René Magritte
-=================================  =======================  ===============  =======================
-
-
+=================================  =======================  ====================  =======================
+**Origin (English)**               **Name (English)**       **Origin (Native)**   **Name (Native)**
+Australia                          Nicole Kidman            Australia             Nicole Kidman
+Austria                            Johann Strauss           Österreich            Johann Strauß
+Belgium (Flemish)                  Rene Magritte            België                René Magritte
+Belgium (French)                   Rene Magritte            Belgique              René Magritte
+Belgium (German)                   Rene Magritte            Belgien               René Magritte
+=================================  =======================  ====================  =======================
 
 Documentation
 -------------
