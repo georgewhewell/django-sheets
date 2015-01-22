@@ -76,10 +76,6 @@ class Sheet(object):
         return [[force_text(cell) for cell in row] for row in reader]
 
 
-class ExplicitNone:
-    pass
-
-
 @register.assignment_tag(name='csv')
 def csv_tag(key):
     return Sheet(key)
