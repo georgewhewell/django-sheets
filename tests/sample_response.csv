@@ -1,10 +1,53 @@
-first_name,last_name,company_name,address,city,county,postal,phone1,phone2,email,web
-Aleshia,Tomkiewicz,Alan D Rosenburg Cpa Pc,14 Taylor St,St. Stephens Ward,Kent,CT2 7PP,01835-703597,01944-369967,atomkiewicz@hotmail.com,http://www.alandrosenburgcpapc.co.uk
-Evan,Zigomalas,Cap Gemini America,5 Binney St,Abbey Ward,Buckinghamshire,HP11 2AX,01937-864715,01714-737668,evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk
-France,Andrade,"Elliott, John W Esq",8 Moor Place,East Southbourne and Tuckton W,Bournemouth,BH6 3BE,01347-368222,01935-821636,france.andrade@hotmail.com,http://www.elliottjohnwesq.co.uk
-Ulysses,Mcwalters,"Mcmahan, Ben L",505 Exeter Rd,Hawerby cum Beesby,Lincolnshire,DN36 5RP,01912-771311,01302-601380,ulysses@hotmail.com,http://www.mcmahanbenl.co.uk
-Tyisha,Veness,Champagne Room,5396 Forth Street,Greets Green and Lyng Ward,West Midlands,B70 9DT,01547-429341,01290-367248,tyisha.veness@hotmail.com,http://www.champagneroom.co.uk
-Eric,Rampy,"Thompson, Michael C Esq",9472 Lind St,Desborough,Northamptonshire,NN14 2GH,01969-886290,01545-817375,erampy@rampy.co.uk,http://www.thompsonmichaelcesq.co.uk
-Marg,Grasmick,Wrangle Hill Auto Auct & Slvg,7457 Cowl St #70,Bargate Ward,Southampton,SO14 3TY,01865-582516,01362-620532,marg@hotmail.com,http://www.wranglehillautoauctslvg.co.uk
-Laquita,Hisaw,In Communications Inc,20 Gloucester Pl #96,Chirton Ward,Tyne & Wear,NE29 7AD,01746-394243,01590-982428,laquita@yahoo.com,http://www.incommunicationsinc.co.uk
-Lura,Manzella,Bizerba Usa Inc,929 Augustine St,Staple Hill Ward,South Gloucestershire,BS16 4LL,01907-538509,01340-713951,lura@hotmail.com,http://www.bizerbausainc.co.uk
+Origin (English),Name (English),Origin (Native),Name (Native)
+Australia,Nicole Kidman,Australia,Nicole Kidman
+Austria,Johann Strauss,Österreich,Johann Strauß
+Belgium (Flemish),Rene Magritte,België,René Magritte
+Belgium (French),Rene Magritte,Belgique,René Magritte
+Belgium (German),Rene Magritte,Belgien,René Magritte
+Bhutan,Gonpo Dorji,འབྲུག་ཡུལ།,མགོན་པོ་རྡོ་རྗེ།
+Canada,Celine Dion,Canada,Céline Dion
+Canada - Nunavut (Inuktitut),Susan Aglukark,ᓄᓇᕗᒻᒥᐅᑦ,ᓱᓴᓐ ᐊᒡᓗᒃᑲᖅ
+Democratic People's Rep. of Korea,LEE Sol-Hee,조선 민주주의 인민 공화국,이설희
+Denmark,Soren Hauch-Fausboll,Danmark,Søren Hauch-Fausbøll
+Denmark,Soren Kierkegaard,Danmark,Søren Kierkegård
+Egypt,Abdel Halim Hafez,ﻣﺼﺮ,ﻋﺑﺪﺍﻠﺣﻟﻳﻢ ﺤﺎﻓﻅ
+Egypt,Om Kolthoum,ﻣﺼﺮ,ﺃﻡ ﻛﻟﺛﻭﻡ
+Eritrea,Berhane Zeray,ብርሃነ ዘርኣይ,ኤርትራ
+Ethiopia,Haile Gebreselassie,ኃይሌ ገብረሥላሴ,ኢትዮጵያ
+France,Gerard Depardieu,France,Gérard Depardieu
+France,Jean Reno,France,Jean Réno
+France,Camille Saint-Saens,France,Camille Saint-Saëns
+France,Mylene Demongeot,France,Mylène Demongeot
+France,Francois Truffaut,France,François Truffaut
+France (Braille),Louis Braille,⠋⠗⠁⠝⠉⠑,⠇⠕⠥⠊⠎⠀<BR>⠃⠗⠁⠊⠇⠇⠑
+Georgia,Eduard Shevardnadze,საქართველო,ედუარდ შევარდნაძე
+Germany,Rudi Voeller,Deutschland,Rudi Völler
+Germany,Walter Schultheiss,Deutschland,Walter Schultheiß
+Greece,Giorgos Dalaras,Ελλάς,Γιώργος Νταλάρας
+Iceland,Bjork Gudmundsdottir,Ísland,Björk Guðmundsdóttir
+India (Hindi),Madhuri Dixit,भारत,माधुरी दिछित
+Ireland,Sinead O'Connor,Éire,Sinéad O'Connor
+Israel,Yehoram Gaon,ישראל,יהורם גאון
+Italy,Fabrizio DeAndre,Italia,Fabrizio De André
+Japan,KUBOTA Toshinobu,日本,久保田    利伸
+Japan,HAYASHIBARA Megumi,日本,林原 めぐみ
+Japan,Mori Ogai,日本,森鷗外
+Japan,Tex Texin,日本,テクス テクサン
+Norway,Tor Age Bringsvaerd,Noreg,Tor Åge Bringsværd
+Pakistan (Urdu),Nusrat Fatah Ali Khan,پاکستان,نصرت فتح علی خان
+People's Rep. of China,ZHANG Ziyi,中国,章子怡
+People's Rep. of China,WONG Faye,中国,王菲
+Poland,Lech Walesa,Polska,Lech Wałęsa
+Puerto Rico,Olga Tanon,Puerto Rico,Olga Tañón
+Rep. of China,Hsu Chi,臺灣,舒淇
+Rep. of China,Ang Lee,臺灣,李安
+Rep. of Korea,AHN Sung-Gi,한민국,안성기
+Rep. of Korea,SHIM Eun-Ha,한민국,심은하
+Russia,Mikhail Gorbachev,Россия,Михаил Горбачёв
+Russia,Boris Grebenshchikov,Россия,Борис Гребенщиков
+Slovenia,"Frane ""Jezek"" Milcinski",Slovenija,Frane Milčinski - Ježek
+Syracuse (Sicily),Archimedes,Συρακούσα,Ἀρχιμήδης
+Thailand,Thongchai McIntai,ประเทศไทย,ธงไชย แม็คอินไตย์
+U.S.A.,Brad Pitt,U.S.A.,Brad Pitt
+Yugoslavia (Cyrillic),Djordje Balasevic,Југославија,Ђорђе Балашевић
+Yugoslavia (Latin),Djordje Balasevic,Jugoslavija,Đorđe Balašević

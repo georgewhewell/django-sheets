@@ -6,14 +6,11 @@
 Welcome to django-sheets's documentation!
 =================================================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
-   readme
    installation
+   configuration
    usage
-   contributing
    authors
    history
