@@ -24,15 +24,23 @@ sample_template = \
     <meta charset="utf-8">
     </head>
     {% load sheets %}
-    {% csv key as uk500 %}
+    {% csv key as data %}
     <table>
-    {% for row in uk500 %}
+        <thead>
         <tr>
-        {% for cell in row %}
-            <td>{{ cell }}</td>
-        {% endfor %}
+            {% for header in data.headers %}
+            <th>{{ header }}</th>
+            {% endfor %}
         </tr>
-    {% endfor %}
+        </thead>
+    <tbody>
+        {% for row in data.rows %}
+        <tr>
+            {% for cell in row %}
+                <td>{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
     </table>
     </html>
     {% endspaceless %}"""
@@ -71,7 +79,8 @@ class TestSheets(SimpleTestCase):
         t = template.Template(sample_template)
         self.assertEqual(
             t.render(template.Context({'key': 'test'})),
-            '<html><head><meta charset="utf-8"></head><table></table></html>')
+            '<html><head><meta charset="utf-8"></head>'
+            '<table><thead><tr></tr></thead><tbody></table></html>')
         self.assertEqual(1, len(responses.calls))
 
     @responses.activate
@@ -86,7 +95,8 @@ class TestSheets(SimpleTestCase):
         self.assertEqual(
             responses.calls[0].request.url,
             gdocs_format.format(key=sample_key))
-
+        # with open(sample_output, 'w') as h:
+        #     h.write(output)
         self.assertEqual(output, open(sample_output).read())
 
     @responses.activate
