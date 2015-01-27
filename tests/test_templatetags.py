@@ -95,8 +95,6 @@ class TestSheets(SimpleTestCase):
         self.assertEqual(
             responses.calls[0].request.url,
             gdocs_format.format(key=sample_key))
-        # with open(sample_output, 'w') as h:
-        #     h.write(output)
         self.assertEqual(output, open(sample_output).read())
 
     @responses.activate
