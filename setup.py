@@ -26,7 +26,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 setup(
     name='django-sheets',
     version=version,
-    description="""Use Google Sheets as context variables in Django templates""",
+    description="Use Google Sheets as context variables in Django templates",
     long_description=readme + '\n\n' + history,
     author='George Whewell',
     author_email='georgerw@gmail.com',
@@ -43,7 +43,7 @@ setup(
     zip_safe=False,
     keywords='django-sheets',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
