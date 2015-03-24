@@ -51,7 +51,7 @@ sample_output = os.path.join(
     os.path.dirname(__file__), 'sample_output.html')
 
 gdocs_format = \
-    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
+    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv'
 
 
 class TestSheets(SimpleTestCase):

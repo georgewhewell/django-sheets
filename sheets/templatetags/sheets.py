@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 register = template.Library()
 
 gdocs_format = \
-    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
+    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv'
 
 CACHE_TIMEOUT = getattr(settings, 'SHEETS_CACHE_TIMEOUT', 300)
 CACHE_KEY = 'django-sheets-{key}'
