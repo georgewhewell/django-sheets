@@ -17,7 +17,7 @@ gdocs_format = \
     'https://docs.google.com/spreadsheets/d/{key}/export?format=csv'
 
 CACHE_TIMEOUT = getattr(settings, 'SHEETS_CACHE_TIMEOUT', 300)
-CACHE_KEY = 'django-sheets-{key}'
+CACHE_KEY = 'django-sheets-{key}-{gid}'
 
 
 class Sheet(object):
@@ -40,9 +40,9 @@ class Sheet(object):
     def rows(self):
         return self.data[1:] if len(self) > 1 else []
 
-    def _fetch_sheet(self, key):
+    def _fetch_sheet(self):
         try:
-            gdocs_url = gdocs_format.format(key=key)
+            gdocs_url = gdocs_format.format(key=self.key)
             if self.gid:
                 gdocs_url += '&gid={}'.format(self.gid)
             response = requests.get(gdocs_url)
@@ -52,16 +52,17 @@ class Sheet(object):
             logger.error('Error fetching spreadsheet: %s' % exp)
             return force_str('')
 
-    def fetch_sheet(self, key):
+    def fetch_sheet(self):
         cache_enabled = not getattr(settings, 'SHEETS_CACHE_DISABLED', False)
         if cache_enabled:
-            cache_key = CACHE_KEY.format(key=key)
+            cache_key = CACHE_KEY.format(
+                key=self.key, gid=self.gid)
             cached_output = cache.get(cache_key)
 
             if cached_output is not None:
                 return cached_output
 
-        sheet = self._fetch_sheet(key)
+        sheet = self._fetch_sheet()
 
         if cache_enabled:
             cache.set(cache_key, sheet, CACHE_TIMEOUT)
@@ -70,7 +71,7 @@ class Sheet(object):
 
     @cached_property
     def data(self):
-        sheet = self.fetch_sheet(self.key)
+        sheet = self.fetch_sheet()
         reader = csv.reader(
             sheet.splitlines(),
             delimiter=str(','),

@@ -99,7 +99,7 @@ class TestSheets(SimpleTestCase):
             '{% endfor %}{% endfor %}')
         output = t.render(template.Context(
             {'key': sample_key, 'gid': sample_gid}))
-        self.assertEqual(output, '234')
+        self.assertEqual(output, 'This is Sheet 2')
 
     @responses.activate
     def test_cache(self):
