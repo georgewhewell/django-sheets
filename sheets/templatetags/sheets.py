@@ -22,10 +22,11 @@ CACHE_KEY = 'django-sheets-{key}'
 
 class Sheet(object):
 
-    def __init__(self, key):
+    def __init__(self, key, gid):
         if not key:
             raise RuntimeError('Sheet key not supplied')
         self.key = key
+        self.gid = gid
 
     def __len__(self):
         return len(self.data)
@@ -41,7 +42,10 @@ class Sheet(object):
 
     def _fetch_sheet(self, key):
         try:
-            response = requests.get(gdocs_format.format(key=key))
+            gdocs_url = gdocs_format.format(key=key)
+            if self.gid:
+                gdocs_url += '&gid={}'.format(self.gid)
+            response = requests.get(gdocs_url)
             response.raise_for_status()
             return force_str(response.content)
         except requests.HTTPError as exp:
@@ -77,5 +81,5 @@ class Sheet(object):
 
 
 @register.assignment_tag(name='csv')
-def csv_tag(key):
-    return Sheet(key)
+def csv_tag(key, gid=None):
+    return Sheet(key, gid)
