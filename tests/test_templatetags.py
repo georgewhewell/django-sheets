@@ -67,34 +67,19 @@ class TestSheets(SimpleTestCase):
         self.assertRaises(RuntimeError, lambda: t.render(template.Context()))
         self.assertEqual(0, len(responses.calls))
 
-    @responses.activate
     def test_404(self):
         """
         Failing to fetch sheet should return empty list
         """
-        responses.add(
-            responses.GET, gdocs_format.format(key='test'),
-            body='404 Not Found', content_type='html/text', status=404,
-            match_querystring=True)
         t = template.Template(sample_template)
         self.assertEqual(
             t.render(template.Context({'key': 'test'})),
             '<html><head><meta charset="utf-8"></head>'
             '<table><thead><tr></tr></thead><tbody></table></html>')
-        self.assertEqual(1, len(responses.calls))
 
-    @responses.activate
-    def test_sample_mocked(self):
-        responses.add(
-            responses.GET, gdocs_format.format(key=sample_key),
-            body=open(sample_response).read(),
-            match_querystring=True, status=200)
+    def test_sample_sheet(self):
         t = template.Template(sample_template)
         output = t.render(template.Context({'key': sample_key}))
-        self.assertEqual(1, len(responses.calls))
-        self.assertEqual(
-            responses.calls[0].request.url,
-            gdocs_format.format(key=sample_key))
         self.assertEqual(output, open(sample_output).read())
 
     @responses.activate
