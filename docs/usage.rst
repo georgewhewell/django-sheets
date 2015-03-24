@@ -53,3 +53,14 @@ Belgium (Flemish)                  Rene Magritte            België             
 Belgium (French)                   Rene Magritte            Belgique              René Magritte
 Belgium (German)                   Rene Magritte            Belgien               René Magritte
 =================================  =======================  ====================  =======================
+
+Multi-sheet Documents
+----------------------
+
+By default, ``django-sheets`` will fetch the first sheet in the document. To access other sheets,
+you can use the ``gid`` parameter::
+
+    {% csv <key> gid=<gid> as <variable_name> %}
+
+To obtain the ``gid`` parameter, you must open the document in Google Docs, and select *Publish to Web*. From
+the drop-down, select the sheet you want and copy the ``gid`` from the link given.
