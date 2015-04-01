@@ -17,9 +17,9 @@ try:
             "django.contrib.contenttypes",
             "django.contrib.sites",
             "sheets",
+            "tests",
         ],
-        SITE_ID=1,
-        NOSE_ARGS=['-s'],
+        SITE_ID=1
     )
 
     try:
@@ -38,13 +38,10 @@ except ImportError:
 
 
 def run_tests(*test_args):
-    if not test_args:
-        test_args = ['tests']
-
     # Run tests
     TestRunner = get_runner(settings)
     test_runner = TestRunner()
-    failures = test_runner.run_tests(test_args)
+    failures = test_runner.run_tests(['tests'])
     sys.exit(bool(failures))
 
 
