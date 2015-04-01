@@ -3,6 +3,11 @@
 History
 -------
 
+0.1.2 (2014-24-03)
+++++++++++++++++++
+
+* Added gid parameter for multi-sheet documents
+
 0.1.1 (2014-22-01)
 ++++++++++++++++++
 

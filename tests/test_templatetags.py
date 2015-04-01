@@ -45,13 +45,14 @@ sample_template = \
     </html>
     {% endspaceless %}"""
 sample_key = '1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE'
+sample_gid = '1389904005'
 sample_response = os.path.join(
     os.path.dirname(__file__), 'sample_response.csv')
 sample_output = os.path.join(
     os.path.dirname(__file__), 'sample_output.html')
 
 gdocs_format = \
-    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv&id={key}'
+    'https://docs.google.com/spreadsheets/d/{key}/export?format=csv'
 
 
 class TestSheets(SimpleTestCase):
@@ -78,9 +79,27 @@ class TestSheets(SimpleTestCase):
             '<table><thead><tr></tr></thead><tbody></table></html>')
 
     def test_sample_sheet(self):
+        """
+        Tests a request against live API
+        """
         t = template.Template(sample_template)
         output = t.render(template.Context({'key': sample_key}))
         self.assertEqual(output, open(sample_output).read())
+
+    def test_sample_sheet_with_gid(self):
+        """
+        Tests a request with gid parameter to live API
+        should return second sheet
+        """
+        t = template.Template(
+            '{% load sheets %}{% csv key gid=gid as data %}'
+            '{% for row in data %}'
+            '{% for cell in row %}'
+            '{{ cell }}'
+            '{% endfor %}{% endfor %}')
+        output = t.render(template.Context(
+            {'key': sample_key, 'gid': sample_gid}))
+        self.assertEqual(output, 'This is Sheet 2')
 
     @responses.activate
     def test_cache(self):
