@@ -13,12 +13,15 @@ env:
   - TOXENV=py27-django1.5
   - TOXENV=py27-django1.6
   - TOXENV=py27-django1.7
+  - TOXENV=py27-django1.8
   - TOXENV=py33-django1.5
   - TOXENV=py33-django1.6
   - TOXENV=py33-django1.7
+  - TOXENV=py33-django1.8
   - TOXENV=py34-django1.5
   - TOXENV=py34-django1.6
   - TOXENV=py34-django1.7
+  - TOXENV=py34-django1.8
 
 # report coverage to coveralls.io
 after_success: coveralls
