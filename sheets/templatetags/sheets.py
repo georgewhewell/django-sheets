@@ -44,7 +44,7 @@ class Sheet(object):
         try:
             gdocs_url = gdocs_format.format(key=self.key)
             if self.gid:
-                gdocs_url += '&gid={}'.format(self.gid)
+                gdocs_url += '&gid={0}'.format(self.gid)
             response = requests.get(gdocs_url)
             response.raise_for_status()
             return force_str(response.content)

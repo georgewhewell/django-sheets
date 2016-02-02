@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 
 try:
@@ -7,9 +10,9 @@ try:
         DEBUG=True,
         USE_TZ=True,
         DATABASES={
-            "default": {
-                "ENGINE": "django.db.backends.sqlite3",
-            }
+            # "default": {
+            #     "ENGINE": "django.db.backends.sqlite3",
+            # }
         },
         ROOT_URLCONF="sheets.urls",
         INSTALLED_APPS=[

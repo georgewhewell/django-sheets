@@ -1,4 +1,6 @@
 *.py[cod]
+*.__PYCACHE__
+*.__pycache__
 
 # C extensions
 *.so
@@ -8,7 +10,9 @@
 *.egg-info
 dist
 build
+docs
 eggs
+.eggs
 parts
 bin
 var
@@ -17,6 +21,7 @@ develop-eggs
 .installed.cfg
 lib
 lib64
+venv
 
 # Installer logs
 pip-log.txt
