@@ -12,23 +12,32 @@ env:
   - TOXENV=py27-docs
   - TOXENV=py27-flake8
 
+  - TOXENV=pypy-django1.5
   - TOXENV=py26-django1.5
   - TOXENV=py27-django1.5
+  - TOXENV=py32-django1.5
   - TOXENV=py33-django1.5
 
+  - TOXENV=pypy-django1.6
   - TOXENV=py26-django1.6
   - TOXENV=py27-django1.6
+  - TOXENV=py32-django1.6
   - TOXENV=py33-django1.6
 
+  - TOXENV=pypy-django1.7
   - TOXENV=py27-django1.7
+  - TOXENV=py32-django1.7
   - TOXENV=py33-django1.7
   - TOXENV=py34-django1.7
 
+  - TOXENV=pypy-django1.8
   - TOXENV=py27-django1.8
+  - TOXENV=py32-django1.8
   - TOXENV=py33-django1.8
   - TOXENV=py34-django1.8
   - TOXENV=py35-django1.8
 
+  - TOXENV=pypy-django1.9
   - TOXENV=py27-django1.9
   - TOXENV=py34-django1.9
   - TOXENV=py35-django1.9
