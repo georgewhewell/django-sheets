@@ -7,15 +7,14 @@ test_django-sheets
 
 Tests for `django-sheets` models module.
 """
-
-import codecs
 import os
-import responses
+import codecs
+
+from vcr_unittest import VCRTestCase
 
 from django import template
 from django.utils.encoding import force_str
-from django.test import SimpleTestCase
-# from django.test.utils import override_settings
+from django.test import override_settings
 from django.core.cache import cache
 
 sample_template = \
@@ -56,9 +55,10 @@ gdocs_format = \
     'https://docs.google.com/spreadsheets/d/{key}/export?format=csv'
 
 
-class TestSheets(SimpleTestCase):
+class TestSheets(VCRTestCase):
 
     def setUp(self):
+        super(TestSheets, self).setUp()
         cache.clear()
 
     def test_no_key(self):
@@ -67,7 +67,6 @@ class TestSheets(SimpleTestCase):
         """
         t = template.Template(sample_template)
         self.assertRaises(RuntimeError, lambda: t.render(template.Context()))
-        self.assertEqual(0, len(responses.calls))
 
     def test_404(self):
         """
@@ -79,13 +78,13 @@ class TestSheets(SimpleTestCase):
             '<html><head><meta charset="utf-8"></head>'
             '<table><thead><tr></tr></thead><tbody></table></html>')
 
-    # def test_sample_sheet(self):
-    #     """
-    #     Tests a request against live API
-    #     """
-    #     t = template.Template(sample_template)
-    #     output = t.render(template.Context({'key': sample_key}))
-    #     self.assertEqual(force_str(output), codecs.open(sample_output).read())
+    def test_sample_sheet(self):
+        """
+        Tests a request against live API
+        """
+        t = template.Template(sample_template)
+        output = t.render(template.Context({'key': sample_key}))
+        self.assertEqual(force_str(output), codecs.open(sample_output).read())
 
     def test_sample_sheet_with_gid(self):
         """
@@ -98,84 +97,42 @@ class TestSheets(SimpleTestCase):
             '{% for cell in row %}'
             '{{ cell }}'
             '{% endfor %}{% endfor %}')
-        output = t.render(template.Context(
-            {'key': sample_key, 'gid': sample_gid}))
+        output = t.render(
+            template.Context({'key': sample_key, 'gid': sample_gid}))
         self.assertEqual(output, 'This is Sheet 2')
 
-    # @responses.activate
-    # def test_cache(self):
-    #     """
-    #     When cache enabled, rendering tag twice should issue one request
-    #     """
-    #     responses.add(
-    #         responses.GET, gdocs_format.format(key=sample_key),
-    #         body=codecs.open(sample_response).read(),
-    #         match_querystring=True, status=200)
-    #     t = template.Template(sample_template)
-    #     t.render(template.Context({'key': sample_key}))
-    #     output = t.render(template.Context({'key': sample_key}))
-    #     self.assertEqual(
-    #           force_str(output), force_str(open(sample_output).read()))
-    #     self.assertEqual(1, len(responses.calls))
+    def test_cache(self):
+        """
+        When cache enabled, rendering tag twice should issue one request
+        """
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        t.render(template.Context({'key': sample_key}))
+        self.assertEqual(1, len(self.cassette))
 
-    # @responses.activate
-    # def test_cache_lazy(self):
-    #     """
-    #     tag should not cause http request if never accessed
-    #     """
-    #     responses.add(
-    #         responses.GET, gdocs_format.format(key=sample_key),
-    #         body=codecs.open(sample_response).read(),
-    #         match_querystring=True, status=200)
-    #     t = template.Template('{% load sheets %}{% csv key as data %}Hello')
-    #     output = t.render(template.Context({'key': sample_key}))
-    #     self.assertEqual(output, 'Hello')
-    #     self.assertEqual(0, len(responses.calls))
+    def test_cache_lazy(self):
+        """
+        tag should not cause http request if never accessed
+        """
+        t = template.Template('{% load sheets %}{% csv key as data %}Hello')
+        t.render(template.Context({'key': sample_key}))
+        self.assertEqual(0, len(self.cassette))
 
-    # @responses.activate
-    # @override_settings(SHEETS_CACHE_DISABLED=True)
-    # def test_cache_disabled(self):
-    #     """
-    #     When cache disabled, rendering tag twice should issue two requests
-    #     """
-    #     responses.add(
-    #         responses.GET, gdocs_format.format(key=sample_key),
-    #         body=codecs.open(sample_response).read(),
-    #         match_querystring=True, status=200)
-    #     t = template.Template(sample_template)
-    #     t.render(template.Context({'key': sample_key}))
-    #     t.render(template.Context({'key': sample_key}))
-    #
-    #     self.assertEqual(2, len(responses.calls))
+    @override_settings(SHEETS_CACHE_DISABLED=True)
+    def test_cache_disabled(self):
+        """
+        When cache disabled, rendering tag twice should issue two requests
+        """
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        t.render(template.Context({'key': sample_key}))
+        self.assertEqual(2, len(self.cassette))
 
-    # @responses.activate
-    # def test_cache_when_empty(self):
-    #     """
-    #     Make sure that empty spreadsheets are not mistaken for cache miss
-    #     """
-    #     responses.add(
-    #         responses.GET, gdocs_format.format(key=sample_key),
-    #         body='',
-    #         match_querystring=True, status=200)
-    #     t = template.Template(sample_template)
-    #     t.render(template.Context({'key': sample_key}))
-    #     t.render(template.Context({'key': sample_key}))
-    #     self.assertEqual(1, len(responses.calls))
-
-    # @responses.activate
-    # def test_add_filter(self):
-    #     """
-    #     Make sure integers are parsed by django filters
-    #     """
-    #     responses.add(
-    #         responses.GET, gdocs_format.format(key=sample_key),
-    #         body='1,2,3',
-    #         match_querystring=True, status=200)
-    #     t = template.Template(
-    #         '{% load sheets %}{% csv key as data %}'
-    #         '{% for row in data %}'
-    #         '{% for cell in row %}'
-    #         '{{ cell|add:"1" }}'
-    #         '{% endfor %}{% endfor %}')
-    #     output = t.render(template.Context({'key': sample_key}))
-    #     self.assertEqual(output, '234')
+    def test_cache_when_empty(self):
+        """
+        Make sure that empty spreadsheets are not mistaken for cache miss
+        """
+        t = template.Template(sample_template)
+        t.render(template.Context({'key': sample_key}))
+        t.render(template.Context({'key': sample_key}))
+        self.assertEqual(1, len(self.cassette))

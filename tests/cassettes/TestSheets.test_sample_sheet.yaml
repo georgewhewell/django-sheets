@@ -1,0 +1,75 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://docs.google.com/spreadsheets/d/1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE/export?format=csv
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAHRW3VMTSxZ/T1X+hy5eLlQ1/gVbWxW+RQGL4N7StyZpkzaTGbZnhr34RAhIAOUC
+        MYKrWYMEBREun9eQEKjawdcQnoDdl5kg6Hqx8i/c0yPha7UIM31+v/M76Zw5fc60cOZjMiqvlX0S
+        U/0VuJkE6QWz5ZRvJhrrpCX61HI6XLqqcSIxgpuZR5EousG8QSLjH+CnAoAbFT+RZeQGL11VsfFU
+        1SjnlHn8lyjjpdNRRSUf04OovE6iQXtTrVSmqIn4ONM0im3emBOoMXsGX9RxKnu+L/u7Tn+sq6cc
+        9vxdHZX/X+bXNfjl9YrcoaAahd9n2MwmzOxTc3PZzK6a2R5zY8jMTtrrKXPjMdATAs1umNmozT0R
+        a7F4ZW5OXliPm9k0CJyOaiITL8HVVGKwpRqmyLgEGbNnWMkPVaJmXSaduobKr8t6QGOarlVgt64S
+        Gbl8kh4gPICtaK8V7bdi49ZYxhqbtkb6rNHXgC5Z0VUrOoKskUFrbNKKAh+2Rpetp31ORw0NKh4O
+        ReBBt6jSIdGfVNRKO64h5R66oXBK8M3aWuRWpMoGSvHJ5OJJbwL98dvGyZT9iU+gk3gKbPRlZe3r
+        sydf1ubxSXz1pDf5Nf5ORJeDYmduiCSjBqJ7/JV1UCbtiiThGnJKGqkrrJGSpKviG4zyAPURwr1X
+        laeUMc29Tketr6tDw652L5UgpMSCcL1HH+BiZqqY3iimF2A1VEyPFtNvi+nHxUyimJ4qZl4WMyvF
+        zCtUTCeL6eFiJlrM9JVitQQhE5LmV/TgxSjpcDEziYqZ50Kdhus82KCBIhJpq6Icip+iu5STLmwN
+        TFuReSsStgbhOQxNCGNwyhqax9ZgUhgDa1ZkDtSanykdcKoaCIOzVk/bOVWpRFSVUXANg8KKPELW
+        o4gdccaKwHXIiqwC+UoEGVqwHsEVQtVxInsohtKHlKEa2gE3RnVcwo3Zy8SZopFCUcGZUPAlwJiV
+        lTOfahJkEmzQTZisVboJlVX8A8qYk9UzXVOXJI6gqDrZRxUNn+PGzEXiTGHfFKaiNq7fu0f0M4m4
+        GW8uMiUNKq/iROyhAt9UdHA4NXEhMVRIjBcSoUIiXkgMFBKjAPUXErFCYrqQGCwkhguJ7r9Utf61
+        kAiXHAdtD/iMOh31VOE+eDi1Xl2kzu2nnXCHA/oAHk540gqPWOFp+5qwwuNWOGaFn1jhf1rhOLZX
+        USs8VaKjyArP2GjsDLLCL+z1HODi20TT6sKtupehvykUfgHHNVTXVI9fIrL3lDB+F8S5+89EggaM
+        3B6/DkVLGfTki6KrtOjL9ZxSURIMfp6iohoiEU5UnIvlMvD3bqcH56K59Z3hnVBuJbe104Ny8Z3e
+        3JLNhXJLOz1Ox3UPtcNX3Vd4ANXr3qAue1WvommMY+Oxekoav9ussfiNNlYED2rZywgqb2Bwr8BN
+        xOvXOYMO+AvTsJmcN5ObZnLRTCbBWLCNN+Z0SEDT3chMvjaTW2byuX1NQjD+bStu6KLEi1p+qlZk
+        WYFdDDBOBWrMXoDBX+WESvgO9SucBFE9gV6892xvdm9mb2TvhVg+2YuBEUd7Y4DE9iBj1zUideE6
+        0s7ZAwZDgrpkLwQXMNTHBRwJwph1OhpJB8yUG7erWtpcqE1R/UxW2nV8PD59/OId/rje93Er/unJ
+        4r8TCD5HkdmPG6mSqMF1x+VuuF7lanWhJurTg6wkO/7X+NHwS3TYEzoMjRyGtkqKJgXS1+Ij545T
+        C/97P36UfFryaKO/IPhncsnjMPzwsOe3w551VFqtHYZXnI5mhf8DGlibwmHQUDhKTPapnYRCGwaK
+        +mzG6DunjNeiDd8iAabCFEXlt7lXh7cNHbKsoTqiET9ySQzdgO6IDzb33/xndn9l/+3+m4OH+ODh
+        /tr+0v5bdBACZB7trx/0/vcR2l8QLMS8OqCqIYkE321wNdeju6yL4Y+p+aPnWfxpLnE0P3LcPflD
+        zc8tIKkjXfRMMjz0+ddl8Ffs2rlJPX4ER4WqBAOkBkgJ+tCz/Uwl4KhTrimoFV6KcIvkI6iNyFA4
+        34GNJWMFJvnlDTSouljhz/3pT6Ep/Dkydvy+/6qTS/ahmzB2T52O48NHCwPnTt/ms6uhGbl12VdZ
+        z/DX2AuYxfYQjkVOepe+pBavukMhNaFaXa5sIBfdh96dxLu/xibAHd7ioIabWMAPXRPVK7ydeKDT
+        4Xwiv7kb2g3lU7u/4vwLuPXlF/OpfAblo8B055fyi7v9u6P55bMgVVCHKoL20g4Dwu/xs4ByNc6o
+        LU3thiAKLNYgylo+uzsAgdP5TRHLLSmdVIZoZaK9U1RW1kgf0EBZGWpikofJaoCV4VOn+wR/cwJq
+        +7HNwbtTI/2wSQMQqYsTj67CgHAzD5O6KrCLw6aC1Euh203t9IlulkvntqxsZiecW8LWRmQntNOf
+        W89tWNm13Gruveh1bSIxokra/DCsPGChJs91WYPjZqaem6kpM7VornebqXEzNWOu99qLV8BNmKl+
+        2x4EG5nrITM1aa73mymA5s3Uqpl6ZtMxoM31R07H7Wvua65rGOaXF92Cl1N8FXA67ujQsiXSKfpn
+        dReHOcc8FbgG2rD3PpxJaOUq7WQenI/shvMrIvP5DDy2ZUj5RH4R53tE/nfH8msIHsWi4HYj8AQE
+        //xy9Jvwlih/L3RjyQmyvz2i8O3Rb+yHSaC3+/8EAAD//wMAk+9kuJkMAAA=
+    headers:
+      alt-svc: ['quic=":443"; ma=2592000; v="30,29,28,27,26,25"']
+      alternate-protocol: ['443:quic,p=1']
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      content-disposition: [attachment; filename="django-sheets-unicode100-unicode-example-utf8.csv";
+          filename*=UTF-8''django-sheets-unicode100%20-%20unicode-example-utf8.csv]
+      content-encoding: [gzip]
+      content-type: [text/csv]
+      date: ['Tue, 23 Feb 2016 19:55:43 GMT']
+      expires: ['Fri, 01 Jan 1990 00:00:00 GMT']
+      p3p: ['CP="This is not a P3P policy! See https://support.google.com/accounts/answer/151657?hl=en
+          for more info."', 'CP="This is not a P3P policy! See https://support.google.com/accounts/answer/151657?hl=en
+          for more info."']
+      pragma: [no-cache]
+      server: [GSE]
+      set-cookie: ['NID=76=R0DrWiDsQks64qDT03bMLGOQbn6Rg2theSB1xza83QqPgcoKOBO93bR-nCbFmwzihV8qBHnswRPiSmhBuUoiyM5v-OADA0WPR15PA3Z7SebXozwA0bX7kXPZTwQomTnw;Domain=.google.com;Path=/;Expires=Wed,
+          24-Aug-2016 19:55:43 GMT;HttpOnly', 'NID=76=dELh4A05bUIZbAF8cxgWR93691k5GvBn2u78XaSeWLYeYCbmkRRsL12bmHxKiyrRVAz93tIHlr7fo8_zT_LsUXNRAE-KvljHa9s8lwJqrVgIJD5UFmjQifHxeNDTT_Uk;Domain=.google.com;Path=/;Expires=Wed,
+          24-Aug-2016 19:55:43 GMT;HttpOnly', 'S=apps-spreadsheets=6wH-WC6abuYrLjr53YWuJw;
+          Domain=.docs.google.com; Expires=Tue, 23-Feb-2016 20:55:43 GMT; Path=/spreadsheets/d/1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE;
+          Secure; HttpOnly']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-robots-tag: ['noindex, nofollow, nosnippet']
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

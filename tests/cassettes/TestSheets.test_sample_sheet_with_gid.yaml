@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://docs.google.com/spreadsheets/d/1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE/export?format=csv&gid=1389904005
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAArJyCxWAKLgjNTUEgUjAAAAAP//AwCPmS2IDwAAAA==
+    headers:
+      alt-svc: ['quic=":443"; ma=2592000; v="30,29,28,27,26,25"']
+      alternate-protocol: ['443:quic,p=1']
+      cache-control: ['no-cache, no-store, max-age=0, must-revalidate']
+      content-disposition: [attachment; filename="django-sheets-unicode100-sheet-two.csv";
+          filename*=UTF-8''django-sheets-unicode100%20-%20sheet-two.csv]
+      content-encoding: [gzip]
+      content-type: [text/csv]
+      date: ['Tue, 23 Feb 2016 19:55:44 GMT']
+      expires: ['Fri, 01 Jan 1990 00:00:00 GMT']
+      p3p: ['CP="This is not a P3P policy! See https://support.google.com/accounts/answer/151657?hl=en
+          for more info."', 'CP="This is not a P3P policy! See https://support.google.com/accounts/answer/151657?hl=en
+          for more info."']
+      pragma: [no-cache]
+      server: [GSE]
+      set-cookie: ['NID=76=ltseczoy6ovqjsjoS3MtvyPa4BPCvHN0OEr0_JAzdPs_XzxpYANAaqqaoTEHGHJ22gYGDsd_EBMYGjUk3MCn6SUqv3JI1CLjdMptCuE3yU7WPW77PK2uCVvKpukIRMhH;Domain=.google.com;Path=/;Expires=Wed,
+          24-Aug-2016 19:55:44 GMT;HttpOnly', 'NID=76=AyLzgdQtAWnfE5U8c3eQW1iBSEf6y_wvNuoIJI52a5tcRUpEgNaou0V62F5Lmhat5sC7Gr9Mipq-kMGSphcD6_XNkunoVWW95t6auVjGRptCVK-2zifyCj0bj8MTV5dv;Domain=.google.com;Path=/;Expires=Wed,
+          24-Aug-2016 19:55:44 GMT;HttpOnly', 'S=apps-spreadsheets=6wH-WC6abuYrLjr53YWuJw;
+          Domain=.docs.google.com; Expires=Tue, 23-Feb-2016 20:55:44 GMT; Path=/spreadsheets/d/1uPsdcGUnUsf3d2xGHRGUUb7_k5IQPtBvfQY61u8Z8wE;
+          Secure; HttpOnly']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-robots-tag: ['noindex, nofollow, nosnippet']
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
