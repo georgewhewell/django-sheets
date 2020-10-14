@@ -81,6 +81,6 @@ class Sheet(object):
         return [[force_text(cell) for cell in row] for row in reader]
 
 
-@register.assignment_tag(name='csv')
+@register.simple_tag(name='csv')
 def csv_tag(key, gid=None):
     return Sheet(key, gid)
