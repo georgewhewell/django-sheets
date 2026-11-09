@@ -45,7 +45,7 @@ class Sheet(object):
             gdocs_url = gdocs_format.format(key=self.key)
             if self.gid:
                 gdocs_url += '&gid={}'.format(self.gid)
-            response = requests.get(gdocs_url)
+            response = requests.get(gdocs_url, timeout=30)
             response.raise_for_status()
             return force_str(response.content)
         except requests.HTTPError as exp:
